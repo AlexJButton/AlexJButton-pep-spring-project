@@ -100,7 +100,7 @@ public class MessageService {
      * @return The persisted message entity.
      */
     public List<Message> getMessageByAccount(int account_id) {
-        return messageRepository.findByPostedBy(account_id);
+        return messageRepository.findByPosted___by(account_id);
     }
 
 

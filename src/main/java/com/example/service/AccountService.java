@@ -20,10 +20,20 @@ public class AccountService {
     /**
      * Find if there is an existing account by the username.
      * @param The username to check for.
-     * @return True if the username account exists, false if not.
+     * @return True if the account exists, false if not.
      */
     public boolean checkAccount(String username){
         return accountRepository.existsByUsername(username);
+    }
+
+
+    /**
+     * Find if there is an existing account by the ID.
+     * @param The ID to check for.
+     * @return True if the account exists, false if not.
+     */
+    public boolean checkAccount(int account_id){
+        return accountRepository.existsById(account_id);
     }
 
 

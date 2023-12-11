@@ -19,6 +19,16 @@ public class MessageService {
 
 
     /**
+     * Find if there is an existing message by the ID.
+     * @param The ID to check for.
+     * @return True if the message exists, false if not.
+     */
+    public boolean checkMessage(int message_id){
+        return messageRepository.existsById(message_id);
+    }
+
+
+    /**
      * Persist a new message entity.
      * @param message a transient message entity.
      * @return The persisted message entity.
@@ -40,7 +50,7 @@ public class MessageService {
     /**
      * Find a messsage by the ID.
      * @param An int containing the message ID.
-     * @return The persisted message entity.
+     * @return The existing message entity or null if not found.
      */
     public Message getMessageByID(int message_id) {
         Optional<Message> optionalMessage = messageRepository.findById(message_id);
@@ -57,13 +67,13 @@ public class MessageService {
      * @param An int containing the message ID.
      * @return The persisted message entity.
      */
-    public int deleteMessageByID(int message_id) {
+    public Integer deleteMessageByID(int message_id) {
         Optional<Message> optionalMessage = messageRepository.findById(message_id);
         if (optionalMessage.isPresent()) {
             messageRepository.deleteById(message_id);
             return 1;
         }
-        return 0;
+        return null;
     }
 
 
@@ -72,14 +82,15 @@ public class MessageService {
      * @param An int containing the message ID and a string containing new text.
      * @return The persisted message entity.
      */
-    public Message updateMessageByID(int message_id, String message_text) {
+    public int updateMessageByID(int message_id, String message_text) {
         Optional<Message> optionalMessage = messageRepository.findById(message_id);
         if (optionalMessage.isPresent()) {
             Message message = optionalMessage.get();
             message.setMessage_text(message_text);
-            return messageRepository.save(message);
+            messageRepository.save(message);
+            return 1;
         }
-        return null;
+        return 0;
     }
 
 

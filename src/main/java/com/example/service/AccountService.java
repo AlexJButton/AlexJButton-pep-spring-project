@@ -29,8 +29,8 @@ public class AccountService {
 
     /**
      * Persist a new account entity.
-     * @param account a transient account entity.
-     * @return the persisted account entity.
+     * @param Account a transient account entity.
+     * @return The persisted account entity.
      */
     public Account addAccount(Account account){
         return accountRepository.save(account);
@@ -41,7 +41,7 @@ public class AccountService {
      * Login a user and return the account information if successful.
      * @param The username to check with.
      * @param The password to check with.
-     * @return the persisted account entity.
+     * @return The persisted account entity.
      */
     public Account loginAccount(String username, String password){
         Optional<Account> optionalAccount = accountRepository.findByUsername(username);

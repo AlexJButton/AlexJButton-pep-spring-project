@@ -57,7 +57,7 @@ public class AccountService {
         Optional<Account> optionalAccount = accountRepository.findByUsername(username);
         if (optionalAccount.isPresent()) {
             Account existingAccount = optionalAccount.get();
-            if (existingAccount.getPassword() == password) {
+            if (existingAccount.getPassword().equals(password)) {
                 return existingAccount;
             }
         }

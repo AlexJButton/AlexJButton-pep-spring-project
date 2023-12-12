@@ -16,7 +16,7 @@ import java.util.List;
  * where applicable as well as the @ResponseBody and @PathVariable annotations. You should
  * refer to prior mini-project labs and lecture materials for guidance on how a controller may be built.
  */
-@Controller
+@RestController
 public class SocialMediaController {
 
     AccountService accountService;
@@ -34,8 +34,6 @@ public class SocialMediaController {
     public Account registerAccount(@RequestBody Account account) {
         boolean usernameCheck = account.getUsername() != null && !account.getUsername().isEmpty();
         boolean passwordCheck = account.getPassword() != null && account.getPassword().length() >= 4;
-        System.out.println(account.getUsername());
-        System.out.println(account.getPassword());
 
         if (!usernameCheck || !passwordCheck) {
             throw new ClientErrorException("");
@@ -53,8 +51,7 @@ public class SocialMediaController {
     @PostMapping("login")
     public Account loginAccount(@RequestBody Account account) {
         Account possibleAccount = accountService.loginAccount(account.getUsername(), account.getPassword());
-
-        if (possibleAccount != null) {
+        if (possibleAccount == null) {
             throw new UnauthorizedException("");
         }
 

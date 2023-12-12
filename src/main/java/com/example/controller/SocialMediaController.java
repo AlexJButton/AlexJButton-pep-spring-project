@@ -34,6 +34,8 @@ public class SocialMediaController {
     public Account registerAccount(@RequestBody Account account) {
         boolean usernameCheck = account.getUsername() != null && !account.getUsername().isEmpty();
         boolean passwordCheck = account.getPassword() != null && account.getPassword().length() >= 4;
+        System.out.println(account.getUsername());
+        System.out.println(account.getPassword());
 
         if (!usernameCheck || !passwordCheck) {
             throw new ClientErrorException("");
@@ -106,7 +108,7 @@ public class SocialMediaController {
 
 
     // This is the endpoint to update specific message by it's id
-    @DeleteMapping("messages/{message_id}")
+    @PatchMapping("messages/{message_id}")
     public int updateMessage(@RequestBody Message message, @PathVariable String message_id) {
         try {
             boolean message_textCheck = !message.getMessage_text().isEmpty() && !(message.getMessage_text().length() > 255);

@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +101,14 @@ public class MessageService {
      * @return The persisted message entity.
      */
     public List<Message> getMessageByAccount(int account_id) {
-        return messageRepository.findByPosted___by(account_id);
+        List<Message> allMessages = messageRepository.findAll();
+        List<Message> matchingMessages = new ArrayList<Message>();
+        for (int i = 0; i < allMessages.size(); i++) {
+            if (allMessages.get(i).getPosted_by() == account_id) {
+                matchingMessages.add(allMessages.get(i));
+            }
+        }
+        return matchingMessages;
     }
 
 

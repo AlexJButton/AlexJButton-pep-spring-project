@@ -125,8 +125,8 @@ public class SocialMediaController {
 
     // This is the endpoint to get all of the messages made by a user
     @GetMapping("accounts/{account_id}/messages")
-    public List<Message> findMessagesByAccount(@PathVariable String message_id) {
-        return messageService.getMessageByAccount(Integer.parseInt(message_id));
+    public List<Message> findMessagesByAccount(@PathVariable String account_id) {
+        return messageService.getMessageByAccount(Integer.parseInt(account_id));
     }
 
 

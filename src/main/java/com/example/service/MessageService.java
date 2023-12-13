@@ -101,17 +101,7 @@ public class MessageService {
      * @return The persisted message entity.
      */
     public List<Message> getMessageByAccount(int account_id) {
-        List<Message> allMessages = messageRepository.findAll();
-        System.out.println(allMessages);
-        System.out.println(account_id);
-        List<Message> matchingMessages = new ArrayList<Message>();
-        for (int i = 0; i < allMessages.size(); i++) {
-            System.out.println(allMessages.get(i));
-            if (allMessages.get(i).getPosted_by() == account_id) {
-                matchingMessages.add(allMessages.get(i));
-            }
-        }
-        return matchingMessages;
+        return messageRepository.customQueryPosted_by(account_id);
     }
 
 
